@@ -11,14 +11,38 @@ $(function() {
         akuma_view_init();
         number = $("#number").val();
         if(!isNaN(number)){
-            akuma_number(number, result_text);
+            if (number < 0) {
+                chart_view();
+            } else {
+              akuma_number(number, result_text);
+            }
           } else {
               not_number();
           }
     });
-
-
 });
+
+function chart_view( num_666, num_6, num_other ) {
+
+    $("#result").append(' <canvas id="resultChart" style="height: 500px; width: 400px;"></canvas>');
+
+    var ctx = document.getElementById("resultChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["666","6","other"],
+            datasets: [{
+            backgroundColor: [
+                "#2ecc71",
+                "#3498db",
+                "#95a5a6",
+            ],
+            data: [num_666,num_6,num_other]
+            }]
+        }
+    });
+}
+
 
 function add_1(number, result_text,c) {
 
