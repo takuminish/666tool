@@ -24,6 +24,16 @@ $(function() {
     });
 });
 
+function akuma_view_init() {
+    $("#result").remove();
+    $("#akuma-view").append('<div id="result"></div>');
+}
+
+function not_number() {
+    view_h2_text("数字以外はいれちゃだめってこと。");
+    view_img("./element/isNuN.jpg", 240,380);
+}
+
 function akuma_number_frequency(number) {
 
     var data = [0,0,0];
@@ -42,19 +52,30 @@ function chart_view( num_other, num_6, num_666 ) {
     var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["666","6","other"],
+            labels: ["6","666","other"],
             datasets: [{
             backgroundColor: [
-                "#2ecc71",
+                "#e74c3c",
                 "#3498db",
                 "#95a5a6",
             ],
-            data: [num_666,num_6,num_other]
+            data: [num_6,num_666,num_other]
             }]
         }
     });
 }
 
+function akuma_number(number, result_text) {
+    
+    var check = check_akumanumber(number, result_text);
+
+    if ( check != 0 ) {return check;}
+    var result = add_1(number, result_text,0);
+    if ( result != 0 ) {return result;} 
+    var result = mult_1(number, result_text,0);
+    if ( result != 0 ) {return result;} 
+    return 0;
+}
 
 function add_1(number, result_text,c) {
 
@@ -111,67 +132,6 @@ function numarray_split(number) {
     return num;
 }
 
-function array_value_text(number,sum,operator) {
-    var sum_text = "<h2 style='text-align: center'>" + number[0];
-    for (var k = 1; k < number.length; k++) {
-        sum_text += operator;
-        sum_text += number[k];
-    }
-    sum_text += " = " + sum;
-    sum_text += "</h2>";
-    return sum_text;
-}
-
-function akuma_number(number, result_text) {
-    
-    var check = check_akumanumber(number, result_text);
-
-    if ( check != 0 ) {return check;}
-    var result = add_1(number, result_text,0);
-    if ( result != 0 ) {return result;} 
-    var result = mult_1(number, result_text,0);
-    if ( result != 0 ) {return result;} 
-    return 0;
-}
-
-function not_number() {
-    view_h2_text("数字以外はいれちゃだめってこと。");
-    view_img("./element/isNuN.jpg", 240,380);
-}
-
-function akuma_view_init() {
-    $("#result").remove();
-    $("#akuma-view").append('<div id="result"></div>');
-}
-
-function view_img(src, width, height) {
-    var result = $("#result");
-    var img = new Image(width,height);
-    img.src = src;
-    $("#result").append(img).css("text-align","center");
-
-    
-}
-
-function view_check_img(view_code, result_text) {
-
-    if (view_code == 1) {
-        view_result(result_text, "./element/6.jpg", "悪魔の数字");
-    } else if (view_code){
-        view_result(result_text, "./element/666.jpg", "悪魔の数字 フリーメイソン!!");
-    }
-}
-
-function view_result(result_text, img, h2_text) {
-    view_result_text(result_text);
-    view_h2_text(h2_text);
-    view_img(img,420,240);
-}
-
-function view_h2_text(text) {
-    $("#result").append('<h2 style="text-align: center;">'+text+'</h2>');
-}
-
 function check_akumanumber(number, result_text) {
 
     number = check_extra_akumanumber(number, result_text);
@@ -183,14 +143,6 @@ function check_akumanumber(number, result_text) {
         return 2;
     } else {
         return 0;
-    }
-}
-
-function view_result_text(result_text) {
-
-    for (var k = 0; k < result_text.length; k++) {
-        view_h2_text(result_text[k]);
-        view_h2_text("↓");
     }
 }
 
@@ -215,5 +167,50 @@ function check_extra_akumanumber(number, result_text) {
         return 999;
     }
     return number;
+}
+
+function array_value_text(number,sum,operator) {
+    var sum_text = "<h2 style='text-align: center'>" + number[0];
+    for (var k = 1; k < number.length; k++) {
+        sum_text += operator;
+        sum_text += number[k];
+    }
+    sum_text += " = " + sum;
+    sum_text += "</h2>";
+    return sum_text;
+}
+
+function view_check_img(view_code, result_text) {
+
+    if (view_code == 1) {
+        view_result(result_text, "./element/6.jpg", "悪魔の数字");
+    } else if (view_code){
+        view_result(result_text, "./element/666.jpg", "悪魔の数字 フリーメイソン!!");
+    }
+}
+
+function view_result(result_text, img, h2_text) {
+    view_result_text(result_text);
+    view_h2_text(h2_text);
+    view_img(img,420,240);
+}
+
+function view_result_text(result_text) {
+
+    for (var k = 0; k < result_text.length; k++) {
+        view_h2_text(result_text[k]);
+        view_h2_text("↓");
+    }
+}
+
+function view_h2_text(text) {
+    $("#result").append('<h2 style="text-align: center;">'+text+'</h2>');
+}
+
+function view_img(src, width, height) {
+    var result = $("#result");
+    var img = new Image(width,height);
+    img.src = src;
+    $("#result").append(img).css("text-align","center");
 }
 
