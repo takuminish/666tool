@@ -14,7 +14,8 @@ $(function() {
             if (number < 0) {
                 chart_view();
             } else {
-              akuma_number(number, result_text);
+              var viewcode = akuma_number(number, result_text);
+              view_check_img(viewcode, result_text);
             }
           } else {
               not_number();
@@ -54,24 +55,37 @@ function add_1(number, result_text,c) {
     sum = num.reduce((s, n) => s + n, 0);
     result_text[c] = array_value_text(num, sum,"+");
     
-    if ( check_akumanumber(sum, result_text) != 0 ) {return -1;};
-    if ( add_1(sum, result_text,c+1) == -1 ) {return -1;} else {result_text.splice(c, 1);}
-    if ( mult_1(sum,result_text,c+1) == -1 ) {return -1;} else {result_text.splice(c, 1);}
+    var check = check_akumanumber(sum, result_text);
+    if ( check != 0 ) {return check;}
+
+    var result = add_1(sum, result_text,c+1);
+    if ( result != 0 ) {return result;} else {result_text.splice(c, 1);}
+    
+    var result = mult_1(sum, result_text,c+1);
+    if ( result != 0 ) {return result;} else {result_text.splice(c, 1);}
+
+    return 0;
 }
 
 function mult_1(number, result_text,c) {
 
     var num = [];
-    console.log("b : "+ c);
     if (parseInt(number/10) == 0 && (number != 6 || number != 9)) {return 0;}
 
     num = numarray_split(number);
     sum = num.reduce((s, n) => s * n, 1);
-    
     result_text[c] = array_value_text(num, sum,"×");
-    if ( check_akumanumber(sum, result_text) != 0 ) {return -1;};
-    if ( add_1(sum, result_text,c+1) == -1 ) {return -1;} else {result_text.splice(c, 1);}
-    if ( mult_1(sum,result_text,c+1) == -1 ) {return -1;} else {result_text.splice(c, 1);}
+    
+    var check = check_akumanumber(sum, result_text);
+    if ( check != 0 ) {return check;}
+    
+    var result = add_1(sum, result_text,c+1);
+    if ( result != 0 ) {return result;} else {result_text.splice(c, 1);}
+    
+    var result = mult_1(sum, result_text,c+1);
+    if ( result != 0 ) {return result;} else {result_text.splice(c, 1);}
+
+    return 0;
 }
 
 function numarray_split(number) {
@@ -100,9 +114,14 @@ function array_value_text(number,sum,operator) {
 
 function akuma_number(number, result_text) {
     
-    if (check_akumanumber(number, result_text) != 0) { return -1;}
-    if ( add_1(number, result_text,0) == -1 ) {return -1;}
-    if ( mult_1(number,result_text,0) == -1 ) {return -1;}
+    var check = check_akumanumber(number, result_text);
+
+    if ( check != 0 ) {return check;}
+    var result = add_1(number, result_text,0);
+    if ( result != 0 ) {return result;} 
+    var result = mult_1(number, result_text,0);
+    if ( result != 0 ) {return result;} 
+    return 0;
 }
 
 function not_number() {
@@ -120,6 +139,23 @@ function view_img(src, width, height) {
     var img = new Image(width,height);
     img.src = src;
     $("#result").append(img).css("text-align","center");
+
+    
+}
+
+function view_check_img(viewcode, result_text) {
+
+    if (viewcode == 1) {
+        view_result(result_text, "./element/6.jpg", "悪魔の数字");
+    } else {
+        view_result(result_text, "./element/666.jpg", "悪魔の数字 フリーメイソン!!");
+    }
+}
+
+function view_result(result_text, img, h2_text) {
+    view_result_text(result_text);
+    view_h2_text(h2_text);
+    view_img(img,420,240);
 }
 
 function view_h2_text(text) {
@@ -132,14 +168,8 @@ function check_akumanumber(number, result_text) {
     number = check_reverse_akumanumber(number,result_text);
 
     if (number == 6) {
-        view_result_text(result_text);
-        view_h2_text("悪魔の数字");
-        view_img("./element/6.jpg",420,240);
         return 1;
     } else if (number == 666) {
-        view_result_text(result_text);
-        view_h2_text("悪魔の数字 フリーメイソン!!");
-        view_img("./element/666.jpg",420,240);
         return 2;
     } else {
         return 0;
