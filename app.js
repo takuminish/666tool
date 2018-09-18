@@ -10,20 +10,31 @@ $(function() {
         result_text = [];
         akuma_view_init();
         number = $("#number").val();
-        if(!isNaN(number)){
-            if (number < 0) {
-                chart_view();
-            } else {
-              var viewcode = akuma_number(number, result_text);
-              view_check_img(viewcode, result_text);
-            }
-          } else {
-              not_number();
-          }
+        if(isNaN(number)){
+            not_number();
+            return ;
+        }
+        if (number < 0) {
+            var chart_data = akuma_number_frequency(number*-1);
+            chart_view(chart_data[0], chart_data[1], chart_data[2]);
+        } else {
+            var viewcode = akuma_number(number, result_text);
+            view_check_img(viewcode, result_text);
+        } 
     });
 });
 
-function chart_view( num_666, num_6, num_other ) {
+function akuma_number_frequency(number) {
+
+    var data = [0,0,0];
+    for (var k = 0; k <= number; k++) {
+        var result = akuma_number(k, result_text);
+        data[result]++;
+    }
+    return data;
+}
+
+function chart_view( num_other, num_6, num_666 ) {
 
     $("#result").append(' <canvas id="resultChart" style="height: 500px; width: 400px;"></canvas>');
 
@@ -48,7 +59,6 @@ function chart_view( num_666, num_6, num_other ) {
 function add_1(number, result_text,c) {
 
     var num = [];
-    console.log("a : "+ c);
     if (parseInt(number/10) == 0 && (number != 6 || number != 9)) {return 0;}
 
     num = numarray_split(number);
@@ -143,11 +153,11 @@ function view_img(src, width, height) {
     
 }
 
-function view_check_img(viewcode, result_text) {
+function view_check_img(view_code, result_text) {
 
-    if (viewcode == 1) {
+    if (view_code == 1) {
         view_result(result_text, "./element/6.jpg", "悪魔の数字");
-    } else {
+    } else if (view_code){
         view_result(result_text, "./element/666.jpg", "悪魔の数字 フリーメイソン!!");
     }
 }
