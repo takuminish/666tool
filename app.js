@@ -46,7 +46,11 @@ $(function() {
 function akuma_view_init() {
 
     $("#result").remove();
+    $("#pie_chart_result").remove();
+    $("#line_chart_result").remove();
     $("#akuma-view").append('<div id="result"></div>');
+    $("#akuma-chart").append('<div id="pie_chart_result" style="width: 490px; float: left;"></div>');
+    $("#akuma-chart").append('<div id="line_chart_result" style="width: 490px; float: right;"></div>');
 }
 
 //--------------------------------------------------------------------
@@ -116,9 +120,9 @@ function pie_chart_view( num_other, num_6, num_666 ) {
             labels: ["6","666","other"],
             datasets: [{
             backgroundColor: [
-                "#e74c3c",
-                "#3498db",
-                "#95a5a6",
+                "yellow",
+                "purple",
+                "#404040",
             ],
             data: [num_6,num_666,num_other]
             }]
@@ -145,15 +149,15 @@ function line_chart_view( x,y_6, y_666) {
             labels: x,
             datasets: [{
                 label: "6",
-                borderColor: "#e74c3c",
+                borderColor: "yellow",
                 fill: false,
-                backgroundColor: "#e74c3c",
+                backgroundColor: "yellow",
                 data: y_6
             },{
                 label: "666",
-                borderColor: "#3498db",
+                borderColor: "purple",
                 fill: false,
-                backgroundColor: "#3498db",
+                backgroundColor: "purple",
                 data: y_666
             }]
         },
