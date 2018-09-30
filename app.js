@@ -302,13 +302,12 @@ function check_reverse_akumanumber(number,result_text) {
 //--------------------------------------------------------------------
 function array_value_text(number,sum,operator) {
 
-    var sum_text = "<h2 style='text-align: center'>" + number[0];
+    var sum_text = number[0];
     for (var k = 1; k < number.length; k++) {
         sum_text += operator;
         sum_text += number[k];
     }
     sum_text += " = " + sum;
-    sum_text += "</h2>";
     return sum_text;
 }
 
@@ -348,7 +347,7 @@ function view_result_text(result_text) {
 // h2タグを表示する
 //--------------------------------------------------------------------
 function view_h2_text(text) {
-    $("#result").append('<h2 style="text-align: center;">'+text+'</h2>');
+    $("#result").append('<h2 style="text-align: center; color: white;">'+text+'</h2>');
 }
 
 //--------------------------------------------------------------------
