@@ -3,6 +3,38 @@
     src: url("./element/font/onryou.TTF");
 }
 
-h1, h2 {
+body {
+    background-color: black;
+}
+
+h1 {
     font-family: Test;
+    text-align: center;
+    color: white;
+}
+
+#akuma-form {
+    width: 70%;
+    margin: auto;
+    marign-bottom: 50px;
+}
+
+#akuma-view {
+    margin: auto;
+    width: 700px;
+}
+
+#akuma-chart {
+    margin: auto;
+    width: 1000px;
+}
+
+#pie_chart_result {
+    width: 490px;
+    float: left;
+}
+
+#line_chart_result {
+    width: 490px;
+    float: right;
 }
