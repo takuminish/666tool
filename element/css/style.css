@@ -13,6 +13,24 @@ h1, h2 {
     color: white;
 }
 
+.fire {
+    display:none;
+    margin-bottom: 50px;
+}
+
+#link {
+    margin:auto;
+    width:500px;
+    text-align: center;
+}
+
+#link-akuma {
+    font-family: Test;
+    color: red;
+    font-size: 40px;
+    text-decoration:none;
+}
+
 #button {
     font-family: Test;
 }
