@@ -128,7 +128,12 @@ function pie_chart_view( num_other, num_6, num_666 ) {
             }]
         },
         options: {
-            responsive: false
+            responsive: false,
+	    legend: {
+		labels: {
+		    fontColor: "white"
+		}
+	    }
         }
     });
 }
@@ -144,28 +149,52 @@ function line_chart_view( x,y_6, y_666) {
     ctx.canvas.height = 245;
     ctx.canvas.width = 490;
     var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: x,
-            datasets: [{
-                label: "6",
-                borderColor: "yellow",
-                fill: false,
-                backgroundColor: "yellow",
-                data: y_6
-            },{
-                label: "666",
-                borderColor: "purple",
-                fill: false,
-                backgroundColor: "purple",
-                data: y_666
-            }]
-        },
-        options: {
-            responsive: false
-        }
+	type: 'line',
+	data: {
+	    labels: x,
+	    datasets: [{
+		label: "6",
+		borderColor: "yellow",
+		fill: false,
+		backgroundColor: "yellow",
+		data: y_6
+	    },{
+		label: "666",
+		borderColor: "purple",
+		fill: false,
+		backgroundColor: "purple",
+		data: y_666
+	    }]
+	},
+	options: {
+	    responsive: false,
+	    scales: {
+		xAxes: [{
+		    gridLines: {
+			color: 'white'
+		    },
+		    ticks: {
+			fontColor: "white"
+		    }
+		}],
+		yAxes: [{
+		    gridLines: {
+			color: 'white'
+		    },
+		    ticks: {
+			fontColor: "white"
+		    }
+		}]
+	    },
+	    legend: {
+		labels: {
+		    fontColor: "white"
+		}
+	    }
+	}
     });
 }
+
 
 //====================================================================
 // textboxに正数が入力されたとき
