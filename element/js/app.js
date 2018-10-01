@@ -59,7 +59,7 @@ function akuma_view_init() {
 function not_number() {
 
     view_h2_text("数字以外はいれちゃだめってこと。");
-    view_img("./element/isNuN.jpg", 240,380);
+    view_img("./element/img/isNuN.jpg", 240,380);
 }
 
 //====================================================================
@@ -346,9 +346,9 @@ function array_value_text(number,sum,operator) {
 function view_check_img(view_code, result_text) {
 
     if (view_code == 1) {
-        view_result(result_text, "./element/6.jpg", "悪魔の数字");
+        view_result(result_text, "./element/img/6.jpg", "悪魔の数字");
     } else if (view_code){
-        view_result(result_text, "./element/666.jpg", "悪魔の数字 フリーメイソン!!");
+        view_result(result_text, "./element/img/666.jpg", "悪魔の数字 フリーメイソン!!");
     }
 }
 
