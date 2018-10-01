@@ -7,16 +7,20 @@ body {
     background-color: black;
 }
 
-h1 {
+h1, h2 {
     font-family: Test;
     text-align: center;
     color: white;
 }
 
+#button {
+    font-family: Test;
+}
+
 #akuma-form {
     width: 70%;
     margin: auto;
-    marign-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 #akuma-view {

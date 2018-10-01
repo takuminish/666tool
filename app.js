@@ -49,8 +49,8 @@ function akuma_view_init() {
     $("#pie_chart_result").remove();
     $("#line_chart_result").remove();
     $("#akuma-view").append('<div id="result"></div>');
-    $("#akuma-chart").append('<div id="pie_chart_result" style="width: 490px; float: left;"></div>');
-    $("#akuma-chart").append('<div id="line_chart_result" style="width: 490px; float: right;"></div>');
+    $("#akuma-chart").append('<div id="pie_chart_result"><div>');
+    $("#akuma-chart").append('<div id="line_chart_result"></div>');
 }
 
 //--------------------------------------------------------------------
@@ -376,7 +376,7 @@ function view_result_text(result_text) {
 // h2タグを表示する
 //--------------------------------------------------------------------
 function view_h2_text(text) {
-    $("#result").append('<h2 style="text-align: center; color: white;">'+text+'</h2>');
+    $("#result").append('<h2>'+text+'</h2>');
 }
 
 //--------------------------------------------------------------------
