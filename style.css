@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "Test";
+    src: url("./element/font/onryou.TTF");
+}
+
+h1, h2 {
+    font-family: Test;
+}
