@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "Test";
+    font-family: "Onryou";
     src: url("../font/Onryou.ttf");
 }
 
@@ -8,7 +8,7 @@ body {
 }
 
 h1, h2 {
-    font-family: Test;
+    font-family: Onryou;
     text-align: center;
     color: white;
 }
@@ -25,14 +25,14 @@ h1, h2 {
 }
 
 #link-akuma {
-    font-family: Test;
+    font-family: Onryou;
     color: red;
     font-size: 40px;
     text-decoration:none;
 }
 
 #button {
-    font-family: Test;
+    font-family: Onryou;
 }
 
 #akuma-form {
