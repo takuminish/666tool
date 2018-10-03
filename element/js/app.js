@@ -3,6 +3,8 @@
 //====================================================================
 $(function () {
 
+
+
     //----------------------------------------------------------------
     // textboxでEnterキーを押すことで、クリックイベント発火
     //----------------------------------------------------------------
@@ -269,7 +271,7 @@ function mult_1(number, result_text, c) {
 //--------------------------------------------------------------------
 function num_split_onedigit(number) {
 
-    return (number + "").split("").reverse().map(x => parseInt(x));
+    return (number + "").split("").map(x => parseInt(x));
 }
 
 //--------------------------------------------------------------------
@@ -356,7 +358,7 @@ function view_check_img(view_code, result_text) {
 
     if (view_code == 1) {
         view_result(result_text, "./element/img/6_mozaiku.jpg", "悪魔の数字");
-    } else if (view_code) {
+    } else if (view_code == 2) {
         view_result(result_text, "./element/img/666_mozaiku.jpg", "悪魔の数字 フリーメイソン!!");
     }
 }
@@ -375,10 +377,11 @@ function view_result(result_text, img, h2_text) {
 //--------------------------------------------------------------------
 function view_result_text(result_text) {
 
-    for (var k = 0; k < result_text.length; k++) {
-        view_h2_text(result_text[k]);
+    result_text.forEach(function (text) {
+        view_h2_text(text);
         view_h2_text("↓");
-    }
+    });
+
 }
 
 //--------------------------------------------------------------------
