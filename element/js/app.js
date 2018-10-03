@@ -113,7 +113,7 @@ function pie_chart_view(num_other, num_6, num_666) {
 
     $("#pie_chart_result").append(' <canvas id="pieChart"></canvas>');
 
-    var ctx = document.getElementById("pieChart").getContext('2d');
+    var ctx = $("#pieChart")[0].getContext('2d');
     ctx.canvas.height = 245;
     ctx.canvas.width = 490;
     var myChart = new Chart(ctx, {
