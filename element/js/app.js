@@ -32,11 +32,11 @@ $(function () {
         }
 
         if (number < 0) { // 数値が負数かどうか
-            var chart_data = akuma_number_frequency(number * -1, line_x, line_y_6, line_y_666); // 0からnumberまでの悪魔の数字の頻度を求める
+            let chart_data = akumanumber_frequency(number * -1, line_x, line_y_6, line_y_666); // 0からnumberまでの悪魔の数字の頻度を求める
             pie_chart_view(chart_data[0], chart_data[1], chart_data[2]); // 円グラフとして表示
             line_chart_view(line_x, line_y_6, line_y_666);
         } else {
-            var viewcode = akuma_number(number, result_text); // 悪魔の数字に変換
+            let viewcode = akumanumber_decidion(number, result_text); // 悪魔の数字に変換
             view_check_img(viewcode, result_text); // 結果を表示
         }
     });
@@ -71,7 +71,7 @@ function not_number() {
 //--------------------------------------------------------------------
 // 6と666とそれ以外の頻度を0~numberの間で求める
 //--------------------------------------------------------------------
-function akuma_number_frequency(number, x, y_6, y_666) {
+function akumanumber_frequency(number, x, y_6, y_666) {
 
     var data = [0, 0, 0];
     var dx = parseInt(number / 10);
@@ -82,8 +82,8 @@ function akuma_number_frequency(number, x, y_6, y_666) {
     y_666.push(0);
     x.push(0);
 
-    for (var k = 1; k <= number; k++) {
-        var result = akuma_number(k, result_text);
+    for (let k = 1; k <= number; k++) {
+        let result = akumanumber_decision(k, result_text);
         data[result]++;
         if (result == 1) {
             count_6++;
@@ -205,7 +205,7 @@ function line_chart_view(x, y_6, y_666) {
 //--------------------------------------------------------------------
 // 入力された数字をなんとか悪魔の数字にする
 //--------------------------------------------------------------------
-function akuma_number(number, result_text) {
+function akumanumber_desicion(number, result_text) {
 
     var check = check_akumanumber(number, result_text);  // 悪魔の数字かどうかチェック
 
