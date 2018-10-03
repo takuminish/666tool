@@ -147,7 +147,7 @@ function line_chart_view(x, y_6, y_666) {
 
     $("#line_chart_result").append(' <canvas id="lineChart" class="well"></canvas>');
 
-    var ctx = document.getElementById("lineChart").getContext('2d');
+    var ctx = $("#lineChart")[0].getContext('2d');
     ctx.canvas.height = 245;
     ctx.canvas.width = 490;
     var myChart = new Chart(ctx, {
