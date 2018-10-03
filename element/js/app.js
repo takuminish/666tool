@@ -3,7 +3,6 @@
 //====================================================================
 $(function () {
 
-
     //----------------------------------------------------------------
     // textboxでEnterキーを押すことで、クリックイベント発火
     //----------------------------------------------------------------
@@ -36,7 +35,7 @@ $(function () {
             pie_chart_view(chart_data[0], chart_data[1], chart_data[2]); // 円グラフとして表示
             line_chart_view(line_x, line_y_6, line_y_666);
         } else {
-            let viewcode = akumanumber_decidion(number, result_text); // 悪魔の数字に変換
+            let viewcode = akumanumber_decision(number, result_text); // 悪魔の数字に変換
             view_check_img(viewcode, result_text); // 結果を表示
         }
     });
@@ -205,9 +204,9 @@ function line_chart_view(x, y_6, y_666) {
 //--------------------------------------------------------------------
 // 入力された数字をなんとか悪魔の数字にする
 //--------------------------------------------------------------------
-function akumanumber_desicion(number, result_text) {
+function akumanumber_decision(number, result_text) {
 
-    var check = check_akumanumber(number, result_text);  // 悪魔の数字かどうかチェック
+    var check = akumanumber_check(number, result_text);  // 悪魔の数字かどうかチェック
 
     if (check != 0) { return check; }
     var result = add_1(number, result_text, 0);  // 処理1 すべて加算
@@ -225,11 +224,11 @@ function add_1(number, result_text, c) {
     var num = [];
     if (parseInt(number / 10) == 0 && (number != 6 || number != 9)) { return 0; } // 1桁になって悪魔の数字じゃなければ失敗
 
-    num = numarray_split(number);  // 数値を1桁ずつ分解
-    sum = num.reduce((s, n) => s + n, 0); // すべて加算
+    num = num_split_onedigit(number);  // 数値を1桁ずつ分解
+    sum = num_add_onedigit(num);       // すべて加算
     result_text[c] = array_value_text(num, sum, "+"); // 計算過程の文字列を作成
 
-    var check = check_akumanumber(sum, result_text);  // 悪魔の数字かどうかチェック
+    var check = akumanumber_check(sum, result_text);  // 悪魔の数字かどうかチェック
     if (check != 0) { return check; }  // 悪魔の数字なら終了
 
     var result = add_1(sum, result_text, c + 1);  // 処理1を実行(再帰)
@@ -249,11 +248,11 @@ function mult_1(number, result_text, c) {
     var num = [];
     if (parseInt(number / 10) == 0 && (number != 6 || number != 9)) { return 0; }  // 1桁になって悪魔の数字じゃなければ失敗
 
-    num = numarray_split(number); // 数値を1桁ずつ分解
-    sum = num.reduce((s, n) => s * n, 1); // すべて乗算
+    num = num_split_onedigit(number); // 数値を1桁ずつ分解
+    sum = num_mult_onedigit(num);     // すべて乗算
     result_text[c] = array_value_text(num, sum, "×"); // 計算過程の文字列を作成
 
-    var check = check_akumanumber(sum, result_text); // 悪魔の数字かどうかチェック
+    var check = akumanumber_check(sum, result_text); // 悪魔の数字かどうかチェック
     if (check != 0) { return check; } // 悪魔の数字なら終了
 
     var result = add_1(sum, result_text, c + 1); // 処理1を実行(相互再帰)
@@ -268,18 +267,34 @@ function mult_1(number, result_text, c) {
 //--------------------------------------------------------------------
 // 数字を1桁ずつ分解する
 //--------------------------------------------------------------------
-function numarray_split(number) {
+function num_split_onedigit(number) {
 
     return (number + "").split("").reverse().map(x => parseInt(x));
 }
 
 //--------------------------------------------------------------------
+// 数字を1桁ずつ加算
+//--------------------------------------------------------------------
+function num_add_onedigit(number) {
+
+    return number.reduce((s, n) => s + n, 0);
+}
+
+//--------------------------------------------------------------------
+// 数字を1桁ずつ乗算
+//--------------------------------------------------------------------
+function num_mult_onedigit(number) {
+
+    return number.reduce((s, n) => s * n, 1);
+}
+
+//--------------------------------------------------------------------
 // 悪魔の数字になっているかチェック
 //--------------------------------------------------------------------
-function check_akumanumber(number, result_text) {
+function akumanumber_check(number, result_text) {
 
-    number = check_extra_akumanumber(number, result_text);  // 18を666、27を999に変換
-    number = check_reverse_akumanumber(number, result_text); // 9を6、999を666に変換
+    number = akumanumber_check_extra(number, result_text);  // 18を666、27を999に変換
+    number = akumanumber_check_reverse(number, result_text); // 9を6、999を666に変換
 
     if (number == 6) { // 悪魔の数字かどうか
         return 1;
@@ -293,7 +308,7 @@ function check_akumanumber(number, result_text) {
 //--------------------------------------------------------------------
 // 18を666、27を999として扱う
 //--------------------------------------------------------------------
-function check_extra_akumanumber(number, result_text) {
+function akumanumber_check_extra(number, result_text) {
 
     if (number == 18) {
         result_text.push("18は6 + 6 + 6");
@@ -308,7 +323,7 @@ function check_extra_akumanumber(number, result_text) {
 //--------------------------------------------------------------------
 // 9を6、999を666として扱う
 //--------------------------------------------------------------------
-function check_reverse_akumanumber(number, result_text) {
+function akumanumber_check_reverse(number, result_text) {
 
     if (number == 9) {
         result_text.push("9を反転させると6");
